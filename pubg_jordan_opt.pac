@@ -391,7 +391,7 @@ function FindProxyForURL(url, host) {
   if (isMatch(url, host)) {
     if (!isInList(ip, JORDAN_MATCH_IPV4)) return BLOCK;
 
-    var net24 = ip.split('.').slice(0, 3).join('.');
+    var net24 = ip.split('.').slice(0, 2).join('.');
     if (!SESSION.matchNet) {
       SESSION.matchNet = net24;
       SESSION.matchHost = host;
