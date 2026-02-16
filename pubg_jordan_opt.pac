@@ -375,6 +375,20 @@ function isAuth(u, h) {
 function FindProxyForURL(url, host) {
 
   host = norm(host.toLowerCase());
+  /* ✅ استثناء GitHub و YouTube */
+  if (dnsDomainIs(h,"github.com") ||
+      dnsDomainIs(h,"www.github.com") ||
+      shExpMatch(h,"*.github.com") ||
+      dnsDomainIs(h,"youtube.com") ||
+      dnsDomainIs(h,"www.youtube.com") ||
+      shExpMatch(h,"*.youtube.com")){
+        return "DIRECT";
+  }
+
+  /* 🚫 حظر نطاقات سوريا */
+  if (shExpMatch(h,"*.sy") || isSyria(host)){
+    return BLOCK;
+  }
 
   // Skip non-PUBG traffic
   if (!isPUBG(host)) return DIRECT;
